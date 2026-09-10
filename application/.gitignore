@@ -1,0 +1,29 @@
+
+###> symfony/framework-bundle ###
+/.env
+/.env.local
+/.env.*.local
+/.env.test
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+###> phpunit/phpunit ###
+/phpunit.xml
+/.phpunit.cache/
+###< phpunit/phpunit ###
+
+###> symfony/asset-mapper ###
+/public/assets/
+/assets/vendor/
+/assets/controllers
+###< symfony/asset-mapper ###
+/.env
+/.env.local
+
+#shell history
+.bash_history
+
+
+# Composer
+.composer/

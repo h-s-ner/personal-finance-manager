@@ -1,0 +1,49 @@
+<div class="table-wrapper">
+        <table class="report-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Transactions</th>
+                    <th>Income</th>
+                    <th>Expense</th>
+                    <th>Balance</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for category in categories %}
+                    <tr>
+                        <td>
+                            <div class="category">
+                                <i class="bi bi-circle-fill"
+                                    style="color: {{ category.color }};"
+                                ></i>
+                                {{ category.name }}
+                            </div>
+                        </td>
+                        <td >
+                            {{ category.transactionCount }}
+                        </td>
+
+                        <td class="income">
+                            {{ category.income|number_format(2, ',', '.') }} €
+                        </td>
+
+                        <td class="expense">
+                            {{ category.expense|number_format(2, ',', '.') }} €
+                        </td>
+
+                        <td class="{{ category.balance >= 0 ? 'balance-positive' : 'balance-negative' }}">
+                            {{ category.balance|number_format(2, ',', '.') }} €
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="empty">
+                           No data available for the selected period.
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>

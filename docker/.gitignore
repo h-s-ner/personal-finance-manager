@@ -1,0 +1,11 @@
+
+# SSL certificates
+/php/apache/server.crt
+/php/apache/server.key
+
+# docker .env
+/.env
+
+# Vim swap files
+*.swp
+*.swo

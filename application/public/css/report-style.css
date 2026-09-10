@@ -1,0 +1,177 @@
+.report-container {
+    max-width: 1000px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.report-header {
+    margin-bottom: 30px;
+}
+
+.report-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #667085;
+}
+
+.report-header h1 {
+    margin: 6px 0;
+    font-size: 32px;
+    color: #101828;
+}
+
+.report-header p {
+    margin: 0;
+    color: #667085;
+}
+
+.filter-card,
+.report-card {
+    background: #fff;
+    border: 1px solid #eaecf0;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(16, 24, 40, .04);
+}
+
+.filter-card {
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.filter-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px;
+}
+
+.filter-group {
+    flex: 1;
+}
+
+.filter-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #344054;
+}
+
+.filter-group input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.filter-row button {
+    height: 42px;
+    padding: 0 18px;
+    border: 0;
+    border-radius: 8px;
+    background: #4f46e5;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.filter-row button:hover {
+    background: #4338ca;
+}
+
+.card-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 17px;
+    color: #101828;
+}
+
+.card-header span {
+    display: block;
+    margin-top: 4px;
+    font-size: 13px;
+    color: #667085;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.report-table th {
+    padding: 13px 24px;
+    background: #f9fafb;
+    color: #667085;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: left;
+    text-transform: uppercase;
+    border-bottom: 1px solid #eaecf0;
+}
+
+.report-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #f2f4f7;
+    font-size: 14px;
+}
+
+.report-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+.report-table tbody tr:hover {
+    background: #fafafa;
+}
+
+.category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+    color: #344054;
+}
+
+
+.income,
+.balance-positive {
+    color: #039855;
+    font-weight: 600;
+}
+
+.expense,
+.balance-negative {
+    color: #d92d20;
+    font-weight: 600;
+}
+
+.empty {
+    padding: 40px !important;
+    text-align: center;
+    color: #667085;
+}
+
+@media (max-width: 600px) {
+    .filter-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-row button {
+        width: 100%;
+    }
+
+    .report-header h1 {
+        font-size: 28px;
+    }
+}

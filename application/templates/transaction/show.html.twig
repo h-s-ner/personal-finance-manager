@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% import 'macros/actions.html.twig' as actions %}
+
+{% block title %}Transaction{% endblock %}
+
+{% block body %}
+    <h1>Transaction</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ transaction.id }}</td>
+            </tr>
+            <tr>
+                <th>Amount</th>
+                <td>{{ transaction.Amount }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ transaction.type.value }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ transaction.description }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ actions.back(path('app_transaction_index')) }}
+
+    {{ actions.show(path('app_transaction_edit', {'id': transaction.id})) }}
+
+    {{ include('transaction/_delete_form.html.twig') }}
+{% endblock %}

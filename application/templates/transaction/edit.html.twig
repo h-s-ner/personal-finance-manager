@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% import 'macros/actions.html.twig' as actions %}
+{% block title %}Edit Transaction{% endblock %}
+
+{% block body %}
+    <h1>Edit Transaction</h1>
+
+    {{ include('transaction/_form.html.twig', {'button_label': 'Update'}) }}
+
+   
+    {{ actions.back(path('app_transaction_index')) }}
+
+    {{ include('transaction/_delete_form.html.twig') }}
+{% endblock %}

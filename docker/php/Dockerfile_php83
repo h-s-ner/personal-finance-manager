@@ -1,0 +1,60 @@
+# -------- BEGIN PHP BASE CONFIG -------- #
+ARG PHP_VERSION=8.3
+FROM php:${PHP_VERSION}-apache
+
+# update & install
+RUN apt-get update && apt-get install -y \
+    # install git
+        git \
+    # install zip & unzip
+        zip \
+        unzip \
+        libzip-dev \
+    # install intl
+        zlib1g-dev \
+        libicu-dev \
+        g++ \
+    # install wget
+        wget 
+
+
+
+# wget
+RUN rm -rf /var/lib/apt/lists/*
+
+# Apache
+RUN a2enmod rewrite \
+    ssl
+
+# zip extension
+RUN docker-php-ext-configure zip
+
+# PHP
+RUN docker-php-ext-install \
+        pdo_mysql \
+        intl \
+        zip
+
+
+# install composer
+COPY composer-install.sh /usr/local/bin/composer-install.sh
+RUN chmod +x /usr/local/bin/composer-install.sh
+RUN /usr/local/bin/composer-install.sh \
+    && mv composer.phar /usr/bin/composer
+
+
+# setup system configurations
+COPY php8.ini /usr/local/etc/php/php.ini
+COPY apache/server.crt /etc/apache2/ssl/server.crt
+COPY apache/server.key /etc/apache2/ssl/server.key
+COPY apache/sites/* /etc/apache2/sites-enabled/
+
+RUN rm /etc/apache2/sites-enabled/000-default.conf
+
+# ensure www-data has necessary permission
+RUN usermod -u 1000 www-data
+
+COPY bootstrap.sh /usr/local/bin/bootstrap.sh
+RUN chmod +x /usr/local/bin/bootstrap.sh
+CMD ["bootstrap.sh"]
+# --------- END PHP BASE CONFIG --------- #

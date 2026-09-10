@@ -1,0 +1,53 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Daily Report{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+     <link rel="stylesheet" href="/css/report-style.css">
+{% endblock %}
+{% block body %}
+
+<div class="report-container">
+<div class="report-header">
+    <div>
+        <span class="report-label">REPORT</span>
+        <h1>Daily Report</h1>
+        <p>View your income and expenses for a specific day.</p>
+    </div>
+</div>
+
+<div class="filter-card">
+    {{ form_start(form) }}
+
+    <div class="filter-row">
+        <div class="filter-group col-4">
+            {{ form_label(form.date, 'Date') }}
+            {{ form_widget(form.date) }}
+        </div>
+
+        <div class="col-2">
+            {{ form_widget(form.submit, {
+                label: 'Show report'
+            }) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="report-card">
+
+    <div class="card-header">
+        <div>
+            <h2>Categories</h2>
+            <span>Income and expenses by category</span>
+        </div>
+    </div>
+
+    {% include 'partials/report-table.html.twig' %}
+
+</div>
+
+</div>
+{% endblock %}

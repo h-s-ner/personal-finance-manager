@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+{% import 'macros/actions.html.twig' as actions %}
+{% block title %}Edit Category{% endblock %}
+
+{% block body %}
+    <h1>Edit Category</h1>
+
+    {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
+
+    {{ actions.back(path('app_category_index')) }}
+
+    {{ include('category/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,330 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    
+
+ {# Statistics #}
+    <h4 class="fw-semibold mb-3">
+        Overall
+    </h4>
+    <div class="row g-4 mb-4">
+
+        {# Income #}
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-body-secondary">
+                            Income
+                        </span>
+                        <span class="bg-success-subtle text-success rounded-3 p-2">
+                            <i class="bi bi-arrow-down-left fs-5"></i>
+                        </span>
+                    </div>
+                    <h2 class="fw-bold mb-1 text-success">
+                        € {{ income|number_format(2, '.', ',') }}
+                    </h2>
+                    <small class="text-body-secondary">
+                        Total income
+                    </small>
+                </div>
+            </div>
+        </div>
+
+
+        {# Expenses #}
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-body-secondary">
+                            Expenses
+                        </span>
+
+                        <span class="bg-danger-subtle text-danger rounded-3 p-2">
+                            <i class="bi bi-arrow-up-right fs-5"></i>
+                        </span>
+                    </div>
+
+                    <h2 class="fw-bold mb-1 text-danger">
+                        € {{ expenses|number_format(2, '.', ',') }}
+                    </h2>
+
+                    <small class="text-body-secondary">
+                        Total expenses
+                    </small>
+
+                </div>
+            </div>
+        </div>
+
+
+        {# Balance #}
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-body-secondary">
+                            Balance
+                        </span>
+
+                        <span class="bg-primary-subtle text-primary rounded-3 p-2">
+                            <i class="bi bi-wallet2 fs-5"></i>
+                        </span>
+                    </div>
+
+                    <h2 class="fw-bold mb-1">
+                        € {{ balance|number_format(2, '.', ',') }}
+                    </h2>
+
+                    <small class="text-body-secondary">
+                        Income − Expenses
+                    </small>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{# Statistics this Month #}
+<div class="fs-4 fw-semibold mb-3">
+    This Month
+</div>
+    <div class="row g-4 mb-4">
+
+        {# Income #}
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-body-secondary">
+                            Income
+                        </span>
+                        <span class="bg-success-subtle text-success rounded-3 p-2">
+                            <i class="bi bi-arrow-down-left fs-5"></i>
+                        </span>
+                    </div>
+                    <h2 class="fw-bold mb-1 text-success">
+                        € {{ incomeThisMonth|number_format(2, '.', ',') }}
+                    </h2>
+                    <small class="text-body-secondary">
+                        Total income
+                    </small>
+                </div>
+            </div>
+        </div>
+
+
+        {# Expenses #}
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-body-secondary">
+                            Expenses
+                        </span>
+
+                        <span class="bg-danger-subtle text-danger rounded-3 p-2">
+                            <i class="bi bi-arrow-up-right fs-5"></i>
+                        </span>
+                    </div>
+
+                    <h2 class="fw-bold mb-1 text-danger">
+                        € {{ expensesThisMonth|number_format(2, '.', ',') }}
+                    </h2>
+
+                    <small class="text-body-secondary">
+                        Total expenses
+                    </small>
+
+                </div>
+            </div>
+        </div>
+
+
+        {# Balance #}
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <span class="text-body-secondary">
+                            Balance
+                        </span>
+
+                        <span class="bg-primary-subtle text-primary rounded-3 p-2">
+                            <i class="bi bi-wallet2 fs-5"></i>
+                        </span>
+                    </div>
+
+                    <h2 class="fw-bold mb-1">
+                        € {{ balanceThisMonth|number_format(2, '.', ',') }}
+                    </h2>
+
+                    <small class="text-body-secondary">
+                        Income − Expenses
+                    </small>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    {# Content #}
+    <div class="row g-4">
+
+        {# Recent Transactions #}
+        <div class="col-lg-8">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-header bg-white border-0 p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+                            <h5 class="mb-1 fw-semibold">
+                                Recent Transactions
+                            </h5>
+
+                            <small class="text-body-secondary">
+                                Latest financial activity
+                            </small>
+                        </div>
+
+                        <a
+                            href="{{ path('app_transaction_index') }}"
+                            class="btn btn-sm btn-outline-secondary"
+                        >
+                            View all
+                        </a>
+
+                    </div>
+                </div>
+
+
+                <div class="table-responsive">
+
+                    <table class="table table-hover align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">Date</th>
+                                <th>Description</th>
+                                <th>Category</th>
+                                <th class="text-end pe-4">Amount</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            {% for transaction in recentTransactions %}
+
+                                <tr>
+
+                                    <td class="ps-4">
+                                        {{ transaction.date|date('d.m.Y') }}
+                                    </td>
+
+                                    <td>
+                                        {{ transaction.description }}
+                                    </td>
+
+                                    <td>
+                                        <span class="badge text-bg-light">
+                                            {{ transaction.category.name }}
+                                        </span>
+                                    </td>
+
+                                    <td class="text-end pe-4 fw-semibold
+                                        {{ transaction.type.value == 'Income'
+                                            ? 'text-success'
+                                            : 'text-danger'
+                                        }}"
+                                    >
+                                        {{ transaction.type.value == 'Income' ? '+' : '-' }}
+                                        € {{ transaction.amount|number_format(2, '.', ',') }}
+                                    </td>
+
+                                </tr>
+
+                            {% else %}
+
+                                <tr>
+                                    <td colspan="4" class="text-center py-5 text-body-secondary">
+                                        No transactions found.
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {# Quick Actions #}
+        <div class="col-lg-4">
+
+            <div class="card border-0 shadow-sm">
+
+                <div class="card-body p-4">
+
+                    <h5 class="fw-semibold mb-1">
+                        Quick Actions
+                    </h5>
+
+                    <p class="text-body-secondary small mb-4">
+                        Common actions
+                    </p>
+
+
+                    <div class="d-grid gap-2">
+
+                        <a
+                            href="{{ path('app_transaction_new') }}"
+                            class="btn btn-success"
+                        >
+                            <i class="bi bi-plus-lg me-2"></i>
+                            Add Transaction
+                        </a>
+
+                        <a
+                            href="{{ path('app_category_new') }}"
+                            class="btn btn-outline-secondary"
+                        >
+                            <i class="bi bi-tag me-2"></i>
+                            Add Category
+                        </a>
+
+                        <a
+                            href="{{ path('app_transaction_index') }}"
+                            class="btn btn-outline-secondary"
+                        >
+                            <i class="bi bi-list-ul me-2"></i>
+                            View Transactions
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+
+

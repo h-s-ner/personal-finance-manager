@@ -1,0 +1,25 @@
+{{ form_start(filter_form) }}
+
+<div class="row">
+    <div class="col-md-2">
+        {{ form_row(filter_form.type) }}
+    </div>
+
+    <div class="col-md-3">
+        {{ form_row(filter_form.category) }}
+    </div>
+
+    <div class="col-md-2">
+        {{ form_row(filter_form.fromDate) }}
+    </div>
+
+    <div class="col-md-2">
+        {{ form_row(filter_form.tillDate) }}
+    </div>
+
+    <div class="col-md-2 d-flex align-items-center justify-content-center">
+        {{ form_row(filter_form.filter) }}
+    </div>
+</div>
+
+{{ form_end(filter_form) }}

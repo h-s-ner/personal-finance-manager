@@ -1,0 +1,43 @@
+services:
+  php:
+    ports:
+      - "80:80"
+      - "443:443"
+    build:
+      context: ./php
+      dockerfile: Dockerfile_${COMPOSE_PHP_IMAGE}
+    volumes:
+      - ${COMPOSE_PATH_TO_HOST_DIRECTORY}:/var/www/
+    working_dir: /var/www
+    depends_on:
+      - mariadb 
+    environment: 
+      - APACHE_DOCUMENT_ROOT=/var/www/public
+      - APACHE_DOCUMENT_DIRECTORY=/var/www/public
+      - SERVER_URL=${COMPOSE_PROJECT_URL}
+      - APPLICATION_ENV=docker
+
+  mariadb:
+    image: mariadb:10.11
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    command: mysqld --sql_mode="ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION"  --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
+    environment:
+      MYSQL_DATABASE: ${COMPOSE_DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${COMPOSE_DB_ROOT_PASSWORD}
+      MYSQL_USER: ${COMPOSE_DB_USER_NAME}
+      MYSQL_PASSWORD: ${COMPOSE_DB_USER_PASSWORD}
+    ports:
+      - "3306:3306"
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_ABSOLUTE_URI=http://pma.${COMPOSE_PROJECT_URL}:8081
+      - PMA_HOST=mariadb
+      - UPLOAD_LIMIT=500M
+    depends_on:
+      - mariadb
+volumes:
+  mariadb_data:

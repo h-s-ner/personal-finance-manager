@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% import 'macros/actions.html.twig' as actions %}
+{% block title %}Transactions{% endblock %}
+
+{% block body %}
+    <h1>Transaction</h1>
+
+    {% include 'transaction/_filter_form.html.twig' %}
+    <table class="table mt-4">
+        <thead class="table-light">
+            <tr>
+                <th>Id</th>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for transaction in transactions %}
+            <tr style="border-inline: 8px solid {{ transaction.getCategory().getColor() }};">
+                <td>{{ transaction.id }}</td>
+                <td >{{ transaction.Amount }}</td>
+                <td class="{{ transaction.type.value|lower =='income' ?'text-success':'text-danger'}}">{{ transaction.type.value }}</td>
+                <td>{{ transaction.date ? transaction.date|date('Y-m-d') : '' }}</td>
+                <td>{{ transaction.description }}</td>
+                <td>
+                    {{ actions.show(path('app_transaction_show', {id: transaction.id})) }}
+                    {{ actions.edit(path('app_transaction_edit', {id: transaction.id})) }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {{ actions.create(path('app_transaction_new')) }}
+{% endblock %}

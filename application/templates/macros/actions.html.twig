@@ -1,0 +1,28 @@
+{% macro show(path, title = 'Show') %}
+    <a href="{{ path }}"
+       class="btn btn-outline-primary"
+       title="{{ title }}">
+        <i class="bi bi-eye"></i>
+    </a>
+{% endmacro %}
+
+{% macro edit(path, title = 'Edit') %}
+    <a href="{{ path }}"
+       class="btn btn-outline-success"
+       title="{{ title }}">
+        <i class="bi bi-pencil"></i>
+    </a>
+{% endmacro %}
+
+{% macro back(url, label = 'Back to list') %}
+    <a href="{{ url }}" class="btn btn-outline-secondary">
+        <i class="bi bi-arrow-left"></i>
+        {{ label }}
+    </a>
+{% endmacro %}
+{% macro create(url, label = 'Create new') %}
+    <a class="btn btn-success" href="{{ url }}">
+        <i class="bi bi-plus-lg"></i>
+        {{ label }}
+    </a>
+{% endmacro %}

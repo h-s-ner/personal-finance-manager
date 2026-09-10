@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Monthly Report{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+     <link rel="stylesheet" href="/css/report-style.css">
+{% endblock %}
+{% block body %}
+
+<div class="report-container">
+<div class="report-header">
+    <span class="report-label">REPORT</span>
+    <h1>Monthly Report</h1>
+    <p>View your income and expenses for a specific month.</p>
+</div>
+
+<div class="filter-card">
+    {{ form_start(form) }}
+
+    <div class="filter-row">
+        <div class="filter-group">
+            {{ form_label(form.month, 'Month') }}
+            {{ form_widget(form.month) }}
+        </div>
+        <div class="filter-group">
+            {{ form_label(form.year, 'Year') }}
+            {{ form_widget(form.year) }}
+        </div>
+
+        <div>
+            {{ form_widget(form.submit, {
+                label: 'Show report'
+            }) }}
+        </div>
+    </div>
+
+    {{ form_end(form) }}
+</div>
+
+<div class="report-card">
+
+    <div class="card-header">
+        <h2>Categories</h2>
+        <span>Income and expenses by category</span>
+    </div>
+
+    {% include 'partials/report-table.html.twig' %}
+
+</div>
+
+</div>
+
+{% endblock %}
