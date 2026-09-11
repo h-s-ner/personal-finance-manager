@@ -4,8 +4,13 @@
 
 {% block body %}
     <h1>Transaction</h1>
-
-    {% include 'transaction/_filter_form.html.twig' %}
+    {% block serach_filter %}
+    {{ form_start(search_form) }}
+    {{ form_row(search_form.search) }}
+    {{ form_row(search_form.submit) }}
+    {{ form_end(search_form) }}
+        {% include 'transaction/_filter_form.html.twig' %}
+    {% endblock %}
     <table class="table mt-4">
         <thead class="table-light">
             <tr>

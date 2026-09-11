@@ -1,0 +1,8 @@
+{% extends 'transaction/index.html.twig' %}
+
+{% block serach_filter %}
+    {{ form_start(form) }}
+    {{ form_row(form.search) }}
+    {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+{% endblock %}

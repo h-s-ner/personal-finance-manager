@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Transaction;
+use App\Form\SearchType;
 use App\Form\TransactionFilterType;
 use App\Form\TransactionType;
 use App\Repository\TransactionRepository;
@@ -18,9 +19,10 @@ final class TransactionController extends AbstractController
     #[Route(name: 'app_transaction_index', methods: ['GET'])]
     public function index(TransactionRepository $transactionRepository, Request $request): Response
     {
-
+        $searchForm = $this->createForm(SearchType::class, null, [
+            'action' => $this->generateUrl('app_search'),
+        ]);
         $form = $this->createForm(TransactionFilterType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -43,7 +45,8 @@ final class TransactionController extends AbstractController
         }
         return $this->render('transaction/index.html.twig', [
             'transactions' => $transactionRepository->findAll(),
-            'filter_form' => $form->createView()
+            'filter_form' => $form->createView(),
+            'search_form' => $searchForm->createView()
         ]);
     }
 
