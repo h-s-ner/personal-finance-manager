@@ -17,9 +17,16 @@
         {{ form_row(filter_form.tillDate) }}
     </div>
 
-    <div class="col-md-2 d-flex align-items-center justify-content-center">
-        {{ form_row(filter_form.filter) }}
+     <div class="col-md-3 d-flex flex-column align-items-start gap-2">
+        {{ form_widget(filter_form.filter) }}
+
+        <a href="{{ path('app_transaction_index') }}"
+           class="btn btn-secondary">
+            Reset filters
+        </a>
     </div>
+    
+
 </div>
 
 {{ form_end(filter_form) }}

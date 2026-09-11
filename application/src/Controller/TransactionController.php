@@ -38,13 +38,12 @@ final class TransactionController extends AbstractController
                 $fromDate,
                 $tillDate
             );
-            return $this->render('transaction/index.html.twig', [
-                'transactions' => $transactions,
-                'filter_form' => $form->createView()
-            ]);
+        }
+        else {
+             $transactions = $transactionRepository->findAll();
         }
         return $this->render('transaction/index.html.twig', [
-            'transactions' => $transactionRepository->findAll(),
+            'transactions' => $transactions,
             'filter_form' => $form->createView(),
             'search_form' => $searchForm->createView()
         ]);
