@@ -31,9 +31,11 @@ final class ReportController extends AbstractController
             $data = $form->getData();
             $from = $data['date'];
         }
+        $to =  clone $from;
+        $to->modify('+1 day');        
 
         return $this->render('report/daily.html.twig', [
-            'categories' => $categoryRepository->findCategoriesForReport($from, $from),
+            'categories' => $categoryRepository->findCategoriesForReport($from, $to),
             'form' => $form->createView(),
         ]);
     }
