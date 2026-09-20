@@ -25,7 +25,7 @@ final class ReportController extends AbstractController
 
         $form->handleRequest($request);
 
-        $from = new \DateTime();
+        $from = new \DateTime('00:00:00');
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
