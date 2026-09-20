@@ -35,8 +35,8 @@ class TransactionFilterType extends AbstractType
                 'required' => false,
                 'widget' => 'single_text',
             ])
-            ->add('tillDate',DateType::class,[
-                'label' => 'Till Date',
+            ->add('toDate',DateType::class,[
+                'label' => 'To Date',
                 'required' => false,        
                 'widget' => 'single_text',
             ])

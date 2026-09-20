@@ -60,7 +60,7 @@ class TransactionRepository extends ServiceEntityRepository
     ?TransactionType $type,
     ?Category $category,
     ?DateTime $fromDate,
-    ?DateTime $tillDate
+    ?DateTime $toDate
     ): array
     {
         $query = $this->createQueryBuilder('t');
@@ -83,10 +83,10 @@ class TransactionRepository extends ServiceEntityRepository
                 ->setParameter('fromDate', $fromDate);
         }
 
-        if ($tillDate !== null) {
+        if ($toDate !== null) {
             $query
-                ->andWhere('t.date <= :tillDate')
-                ->setParameter('tillDate', $tillDate);
+                ->andWhere('t.date <= :toDate')
+                ->setParameter('toDate', $toDate);
         }
 
         return $query
@@ -115,14 +115,14 @@ class TransactionRepository extends ServiceEntityRepository
     public function getCurrentMonthTotalsByType(): array
     {
         $fromDate = new DateTime('first day of this month 00:00:00');
-        $tillDate = new DateTime('first day of next month 00:00:00');
+        $toDate = new DateTime('first day of next month 00:00:00');
 
         $results =  $this->createQueryBuilder('t')
             ->select('t.type, SUM(t.amount) as total')
             ->andWhere('t.date >= :fromDate')
-            ->andWhere('t.date < :tillDate')
+            ->andWhere('t.date < :toDate')
             ->setParameter('fromDate', $fromDate)
-            ->setParameter('tillDate', $tillDate)
+            ->setParameter('toDate', $toDate)
             ->groupBy('t.type')
             ->getQuery()
             ->getResult();

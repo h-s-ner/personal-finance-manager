@@ -31,12 +31,12 @@ final class TransactionController extends AbstractController
             $type = $data['type'];
             $category = $data['category'];
             $fromDate = $data['fromDate'];
-            $tillDate = $data['tillDate'];
+            $toDate = $data['toDate'];
             $transactions = $transactionRepository->findFiltered(
                 $type,
                 $category,
                 $fromDate,
-                $tillDate
+                $toDate
             );
         }
         else {
