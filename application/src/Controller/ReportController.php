@@ -37,6 +37,8 @@ final class ReportController extends AbstractController
         return $this->render('report/daily.html.twig', [
             'categories' => $categoryRepository->findCategoriesForReport($from, $to),
             'form' => $form->createView(),
+            'fromDate' => $from,
+            'toDate' => $to
         ]);
     }
 
@@ -68,6 +70,8 @@ final class ReportController extends AbstractController
         return $this->render('report/monthly.html.twig', [
             'categories' => $categoryRepository->findCategoriesForReport($from, $to),
             'form' => $form->createView(),
+            'fromDate' => $from,
+            'toDate' => $to
         ]);
     }
 
@@ -83,6 +87,7 @@ final class ReportController extends AbstractController
             'period' => 'year',
             'years' => $years
         ]);
+
         $form->handleRequest($request);
         $year = date('Y');      
         if ($form->isSubmitted() && $form->isValid()) {
@@ -95,6 +100,8 @@ final class ReportController extends AbstractController
         return $this->render('report/yearly.html.twig', [
             'categories' => $categoryRepository->findCategoriesForReport($from, $to),
             'form' => $form->createView(),
+            'fromDate' => $from,
+            'toDate' => $to
         ]);
     }
 }
