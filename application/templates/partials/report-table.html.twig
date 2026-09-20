@@ -7,6 +7,7 @@
                     <th>Income</th>
                     <th>Expense</th>
                     <th>Balance</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -35,6 +36,19 @@
 
                         <td class="{{ category.balance >= 0 ? 'balance-positive' : 'balance-negative' }}">
                             {{ category.balance|number_format(2, ',', '.') }} €
+                        </td>
+                        <td>
+                            <a class="text-decoration-none" style="color: {{ category.color }};"
+                                href="{{ path('app_transaction_index', {
+                                    'transaction_filter': {
+                                        'category': category.id,
+                                        'fromDate': fromDate|date('Y-m-d'),
+                                        'toDate': toDate|date('Y-m-d')
+                                    }
+                                }) }}"
+                            >
+                                Transaktionsliste <i class="bi bi-arrow-left-right ms-2"></i></i>
+                            </a>
                         </td>
                     </tr>
                 {% else %}
