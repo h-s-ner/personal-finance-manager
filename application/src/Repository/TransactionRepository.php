@@ -85,7 +85,7 @@ class TransactionRepository extends ServiceEntityRepository
 
         if ($toDate !== null) {
             $query
-                ->andWhere('t.date <= :toDate')
+                ->andWhere('t.date < :toDate')
                 ->setParameter('toDate', $toDate);
         }
 
