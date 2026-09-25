@@ -26,9 +26,9 @@
         </tbody>
     </table>
 
-    <a class="btn btn-outline-success" href="{{ path('app_category_index') }}">back to list</a>
+    {{ actions.back(path('app_category_index')) }}
 
-    <a class="btn btn-outline-success" href="{{ path('app_category_edit', {'id': category.id}) }}" title="edit"><i class="bi bi-pencil"></i></a>
-
-    {{ include('category/_delete_form.html.twig') }}
+    {{ actions.edit(path('app_category_edit', {'id': category.id})) }}
+   
+    {{ actions.delete(path('app_category_delete', {'id': category.id})) }}
 {% endblock %}

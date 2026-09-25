@@ -3,8 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Form\CategoryDeleteType;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use App\Repository\TransactionRepository;
+use App\Service\CategoryDeletionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -68,14 +71,37 @@ final class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
-    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($category);
-            $entityManager->flush();
+    #[Route('/{id}/delete', name: 'app_category_delete', methods: ['GET','POST'])]
+    public function delete(
+        Request $request,
+        Category $category,
+        TransactionRepository $transactionRepository,
+        CategoryDeletionService $categoryDeletionService): Response
+    {       
+        $transactionsCount = $transactionRepository->countCategoryTransactions($category);
+        $form = $this->createForm(CategoryDeleteType::class, null, [
+            'category' => $category,
+            'transactionsCount' => $transactionsCount
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $replacementCategory = null;
+            if ($form->has('replacementCategory')) {
+                $replacementCategory = $form->get('replacementCategory')->getData();
+            }
+            $categoryDeletionService->delete(
+                $category,
+                $replacementCategory
+            );
+            return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->redirectToRoute('app_category_index', [], Response::HTTP_SEE_OTHER);
+        return $this->render('category/delete.html.twig', [
+            'category' => $category,
+            'transactionsCount' => $transactionsCount,
+            'form' => $form,
+        ]);
+       
     }
 }

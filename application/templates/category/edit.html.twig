@@ -8,6 +8,5 @@
     {{ include('category/_form.html.twig', {'button_label': 'Update'}) }}
 
     {{ actions.back(path('app_category_index')) }}
-
-    {{ include('category/_delete_form.html.twig') }}
+    {{ actions.delete(path('app_category_delete', {'id': category.id})) }}
 {% endblock %}

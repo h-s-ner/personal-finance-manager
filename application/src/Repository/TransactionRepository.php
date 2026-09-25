@@ -138,5 +138,14 @@ class TransactionRepository extends ServiceEntityRepository
        ->select('min(t.date)')
        ->getQuery()
        ->getSingleScalarResult();
+    }
+    public function countCategoryTransactions(Category $category): int
+    {
+        return (int) $this->createQueryBuilder('t')
+            ->select('COUNT(t.id)')
+            ->andWhere('t.category = :category')
+            ->setParameter(':category', $category)
+            ->getQuery()
+            ->getSingleScalarResult();
     }    
 }

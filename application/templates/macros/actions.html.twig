@@ -26,3 +26,9 @@
         {{ label }}
     </a>
 {% endmacro %}
+
+{% macro delete(url) %}
+    <a class="btn btn-danger" href="{{ url }}">
+        <i class="bi bi-trash"></i>
+    </a>
+{% endmacro %}

@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% import 'macros/actions.html.twig' as actions %}
 {% block title %}New Category{% endblock %}
 
 {% block body %}
@@ -7,5 +7,5 @@
 
     {{ include('category/_form.html.twig') }}
 
-    <a class="btn btn-primary" href="{{ path('app_category_index') }}">back to list</a>
+    {{ actions.back(path('app_category_index')) }}
 {% endblock %}
